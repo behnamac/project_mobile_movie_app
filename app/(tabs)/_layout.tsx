@@ -7,7 +7,7 @@ import { icons } from "@/constants/icons";
 const TabsIcon = ({ focused, icon, title }: any) => {
   if (focused) {
     return (
-      <ImageBackground className="flex  bg-purple-300 flex-row w-full flex-1 min-w-[114px] min-h-16 mt-4 justify-center items-center rounded-full overflow-hidden">
+      <ImageBackground source={images.highlight} className="flex  bg-purple-300 flex-row w-full flex-1 min-w-[112px] min-h-16 mt-4 justify-center items-center rounded-full overflow-hidden">
         <Image source={icon} className="size-5" tintColor="#151312" />
         <Text className="text-secondary text-base font-semibold ml-2">
           {title}
@@ -53,7 +53,7 @@ const _layout = () => {
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <>
-              <TabsIcon title="Home" icon={icons.home} focused={true} />
+              <TabsIcon title="Home" icon={icons.home} focused={focused} />
             </>
           ),
         }}
@@ -65,7 +65,7 @@ const _layout = () => {
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <>
-              <TabsIcon title="Saved" icon={icons.save} />
+              <TabsIcon title="Saved" icon={icons.save} focused={focused} />
             </>
           ),
         }}
@@ -77,7 +77,7 @@ const _layout = () => {
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <>
-              <TabsIcon title="Search" icon={icons.search} />
+              <TabsIcon title="Search" icon={icons.search} focused={focused} />
             </>
           ),
         }}
@@ -89,7 +89,7 @@ const _layout = () => {
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <>
-              <TabsIcon title="Profile" icon={icons.person} />
+              <TabsIcon title="Profile" icon={icons.person} focused={focused} />
             </>
           ),
         }}
