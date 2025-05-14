@@ -18,13 +18,13 @@ const Serach = () => {
   } = useFetch(() => fetchMovies({ query: searchQuery }), false);
 
   useEffect(() => {
-    const timeoutId =setTimeout( async () => {
+    const timeoutId = setTimeout(async () => {
       if (searchQuery.trim()) {
         await loadMovies();
       } else {
         resetMovies();
       }
-    },500);
+    }, 500);
     return () => {
       clearTimeout(timeoutId);
     };
@@ -82,6 +82,15 @@ const Serach = () => {
                 </Text>
               )}
           </>
+        }
+        ListEmptyComponent={
+          !loading && !error ? (
+            <View className="fmt-10 px-5">
+              <Text className="text-center text-gray-500">
+                {searchQuery.trim() ? "No movie found" : "Search for a movie"}
+              </Text>
+            </View>
+          ) : null
         }
       />
     </View>
