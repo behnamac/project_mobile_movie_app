@@ -18,14 +18,16 @@ const Serach = () => {
   } = useFetch(() => fetchMovies({ query: searchQuery }), false);
 
   useEffect(() => {
-    const func = async () => {
+    const timeoutId =setTimeout( async () => {
       if (searchQuery.trim()) {
         await loadMovies();
       } else {
         resetMovies();
       }
+    },500);
+    return () => {
+      clearTimeout(timeoutId);
     };
-    func();
   }, [searchQuery]);
 
   return (
