@@ -1,20 +1,32 @@
 import { View, Text, Image, FlatList, ActivityIndicator } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { images } from "@/constants/images";
 import MovieCard from "@/components/MovieCard";
-import { useRouter } from "expo-router";
 import useFetch from "@/services/useFetch";
 import { fetchMovies } from "@/services/api";
 import { icons } from "@/constants/icons";
 import SearchBar from "@/components/SearchBar";
 
 const Serach = () => {
-  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
   const {
     data: movies,
     loading,
     error,
-  } = useFetch(() => fetchMovies({ query: "" }));
+    refatch: loadMovies,
+    reset: resetMovies,
+  } = useFetch(() => fetchMovies({ query: searchQuery }), false);
+
+  useEffect(() => {
+    const func = async () => {
+      if (searchQuery.trim()) {
+        await loadMovies();
+      } else {
+        resetMovies();
+      }
+    };
+    func();
+  }, [searchQuery]);
 
   return (
     <View className="flex-1 bg-primary">
@@ -41,7 +53,10 @@ const Serach = () => {
               <Image source={icons.logo} className="w-12 h-10"></Image>
             </View>
             <View className="my-5">
-              <SearchBar placeholder="Search movies ... " />
+              <SearchBar
+                placeholder="Search movies ... "
+                onChangeText={(text) => setSearchQuery(text)}
+              />
             </View>
             {loading && (
               <ActivityIndicator
@@ -51,14 +66,17 @@ const Serach = () => {
               />
             )}
             {error && (
-              <Text className="text-red-500 px-5 my-3">{error.message}</Text>
+              <Text className="text-red-500 px-5 my-3">
+                Error: {error.message}
+              </Text>
             )}
             {!loading &&
               !error &&
               "SEARCH TERMS".trim() &&
               (movies ?? []).length > 0 && (
                 <Text className="text-lg text-white font-bold">
-                  Search results for{' '}<Text className="text-purple-400">SEARCH TERMS</Text>
+                  Search results for{" "}
+                  <Text className="text-purple-400">SEARCH TERMS</Text>
                 </Text>
               )}
           </>
