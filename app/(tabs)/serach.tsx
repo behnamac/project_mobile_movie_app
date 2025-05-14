@@ -22,9 +22,8 @@ const Serach = () => {
     const timeoutId = setTimeout(async () => {
       if (searchQuery.trim()) {
         await loadMovies();
-        if (movies && movies?.length > 0&& movies?.[0]) {
-           await updateSearchCount(searchQuery, movies[0]);
-
+        if (movies && movies?.length > 0 && movies?.[0]) {
+          await updateSearchCount(searchQuery, movies[0]);
         }
       } else {
         resetMovies();
