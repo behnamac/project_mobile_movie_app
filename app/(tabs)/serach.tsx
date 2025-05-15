@@ -22,9 +22,7 @@ const Serach = () => {
     const timeoutId = setTimeout(async () => {
       if (searchQuery.trim()) {
         await loadMovies();
-        if (movies && movies?.length > 0 && movies?.[0]) {
-          await updateSearchCount(searchQuery, movies[0]);
-        }
+     
       } else {
         resetMovies();
       }
@@ -33,6 +31,15 @@ const Serach = () => {
       clearTimeout(timeoutId);
     };
   }, [searchQuery]);
+
+  useEffect(() => { 
+    const updateCount = async () => {
+      if (movies && movies?.length > 0 && movies?.[0]) {
+        await updateSearchCount(searchQuery, movies[0]);
+      }
+    };
+    updateCount();
+  }, [movies]);
 
   return (
     <View className="flex-1 bg-primary">

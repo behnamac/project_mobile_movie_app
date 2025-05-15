@@ -14,6 +14,22 @@ const client = new Client()
 
 const databases = new Databases(client);
 
+export const getTrandingMovies = async (): Promise<
+  TrendingMovie[] | undefined
+> => {
+  try {
+    const result = await databases.listDocuments(DATABASE_ID, COLLECTION_ID, [
+      Query.limit(5),
+      Query.orderDesc("count"),
+    ]);
+    console.log(result);
+    return result.documents as unknown as TrendingMovie[];
+  } catch (error) {
+    console.error("Error fetching trending movies:", error);
+    throw error;
+  }
+};
+
 export const updateSearchCount = async (query: string, movie: Movie) => {
   try {
     const result = await databases.listDocuments(DATABASE_ID, COLLECTION_ID, [
