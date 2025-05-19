@@ -5,6 +5,17 @@ import useFetch from "@/services/useFetch";
 import { fetchMovieDetails } from "@/services/api";
 import { icons } from "@/constants/icons";
 
+interface MovieDetailsProps {
+  label?: string;
+  value?: string | number | null;
+}
+const MovieInfo = ({ label, value }: MovieDetailsProps) => (
+  <View className="flex-col items-start justify-center mt-5">
+    <Text className="text-light-200 font-normal text-sm">{label}</Text>
+    <Text className="text-light-100 font-bold text-sm">{value || "N/A"}</Text>
+  </View>
+);
+
 const MovieDetails = () => {
   const { id } = useLocalSearchParams();
   const { data: movie, loading } = useFetch(() =>
@@ -40,6 +51,33 @@ const MovieDetails = () => {
               ({movie?.vote_count} votes)
             </Text>{" "}
           </View>
+          <MovieInfo label="Overview" value={movie?.overview} />
+          <MovieInfo
+            label="Genres"
+            value={
+              movie?.genres && Array.isArray(movie.genres)
+                ? movie.genres
+                    .map((genre: { name: string }) => genre.name)
+                    .join(" - ")
+                : "N/A"
+            }
+          />
+          <MovieInfo
+            label="Budget"
+            value={
+              typeof movie?.budget === "number"
+                ? `$${(movie.budget / 1_000_000).toFixed(1)}M`
+                : "N/A"
+            }
+          />
+          <MovieInfo
+            label="Revenue"
+            value={
+              typeof movie?.revenue === "number"
+                ? `$${Math.round(movie.revenue / 1_000_000)}M`
+                : "N/A"
+            }
+          />
         </View>
       </ScrollView>
     </View>
