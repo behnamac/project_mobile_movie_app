@@ -1,7 +1,7 @@
 # Movie Explorer - Full Stack React Native App
 
 Welcome to the **Movie Explorer** app!  
-This is a personal project I built using **React Native** and **Tailwind CSS** for the frontend, with **Upright** as the backend. The app helps users explore the latest and trending movies, search for any title, and view detailed movie information.
+This is a personal project I built using **React Native** and **Tailwind CSS** for the frontend, with **Appwrite** as the backend. The app helps users explore the latest and trending movies, search for any title, and view detailed movie information.
 
 ---
 
