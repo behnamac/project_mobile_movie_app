@@ -29,3 +29,45 @@ This is a personal project I built using **React Native** and **Tailwind CSS** f
 
 ```bash
 npm install
+```
+
+### 2. Start the app
+-bash
+-Copy
+-Edit
+
+```bash
+npx expo start
+```
+### You can then run the app on:
+
+-Android emulator
+
+-iOS simulator
+
+-Expo Go (on your phone)
+
+### 📁 Project Structure
+
+app/ – Main application code using file-based routing
+
+components/ – Reusable UI components
+
+api/ – Functions for fetching data from Upright
+
+### 📚 Learn More
+
+-React Native Docs
+
+-Expo Documentation
+
+-Tailwind CSS
+
+-appwrite
+
+### 🙌 Contributing
+This is a personal project, but feel free to fork it or suggest improvements.
+I'm always open to feedback and collaboration!
+
+### 📩 Contact
+If you’d like to get in touch or learn more, feel free to connect with me on GitHub.
